@@ -1,6 +1,30 @@
 function [public_vars] = student_workspace(read_only_vars,public_vars)
 %STUDENT_WORKSPACE Summary of this function goes here
 
+% Week 2, task 2,3
+% 7. Uncertainty
+% Measuring standard deviation
+if (isfield(public_vars, 'config') && isfield(public_vars.config, 'meas_mode'))
+
+    public_vars = collect_measurements(read_only_vars, public_vars);
+    if (read_only_vars.counter >= 100)
+
+        if (strcmp(public_vars.config.meas_mode, 'lidar'))
+
+            analyze_lidar(public_vars);
+            error('Konec mereni - lidar');
+
+        elseif (strcmp(public_vars.config.meas_mode, 'gnss'))
+
+            analyze_gnss(read_only_vars);
+            error('Konec mereni - gnss');
+
+        end   
+    end
+end
+
+
+
 % 8. Perform initialization procedure
 if (read_only_vars.counter == 1)
           
