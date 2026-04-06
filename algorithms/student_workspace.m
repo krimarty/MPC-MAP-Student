@@ -43,12 +43,29 @@ public_vars.particles = update_particle_filter(read_only_vars, public_vars);
 public_vars.estimated_pose = estimate_pose(public_vars); % (x,y,theta)
 
 % 12. Path planning
-public_vars.path = plan_path(read_only_vars, public_vars);
+%public_vars.path = plan_path(read_only_vars, public_vars);
+% Week 3
+public_vars.path = custom_path(read_only_vars, public_vars);
+
 
 % 13. Plan next motion command
 public_vars = plan_motion(read_only_vars, public_vars);
 
-
+% Week 3, task 3, PID tunning for XTE
+% Plot Y vs time (pro tuning PID)
+% if ~isfield(public_vars, 'y_history')
+%     public_vars.y_history = [];
+% end
+% public_vars.y_history = [public_vars.y_history; read_only_vars.mocap_pose(2)];
+% 
+% figure(2);
+% t = (0:length(public_vars.y_history)-1) * read_only_vars.sampling_period;
+% plot(t, public_vars.y_history);
+% xlabel('Time [s]');
+% ylabel('Y [m]');
+% title('Y souradnice v case');
+% grid on;
+% drawnow limitrate;
 
 end
 

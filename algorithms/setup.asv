@@ -25,7 +25,7 @@ elseif CONFIG == 3
 elseif CONFIG == 4
     % Custom mapa
     map_name       = 'maps/custom_1.txt';
-    start_position = [5, 10, pi/2];
+    start_position = [5, 15, 0];
 end
 
 % =========================================================
