@@ -32,6 +32,7 @@ if (isfield(public_vars, 'config') && isfield(public_vars.config, 'meas_mode'))
 
 else
 
+% Week 3
 % CONFIG - choose the method
 method   = 'pure_pursuit';   % 'xte', 'pure_pursuit'
 L        = 0.3;                % lookahead distance (pure_pursuit)
@@ -53,7 +54,7 @@ switch method
         error('plan_motion: wrong motion: %s', method);
 end
 
-public_vars.motion_vector = [vr, vl];
+%public_vars.motion_vector = [1, 0.7];
 
 % % Week 3 method camparison
 % % Plot XTE vs time (

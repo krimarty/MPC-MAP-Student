@@ -13,7 +13,7 @@ measurements = zeros(size(particles,1), length(read_only_vars.lidar_config));
 for i=1:size(particles, 1)
     measurements(i,:) = compute_lidar_measurement(read_only_vars.map, particles(i,:), read_only_vars.lidar_config);
 end
-weights = weight_particles(measurements, read_only_vars.lidar_distances);
+weights = weight_particles(measurements, read_only_vars.lidar_distances, public_vars);
 
 % III. Resampling
 particles = resample_particles(particles, weights);

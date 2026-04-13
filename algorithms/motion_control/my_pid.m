@@ -1,4 +1,4 @@
-function [output, public_vars] = my_pid(error, public_vars)
+function [output, public_vars] = my_pid(error, public_vars, read_only_vars)
 %PID Summary of this function goes here
 %   Detailed explanation goes here
 % Ziegler-Nicols K = 0.42, T = 13
@@ -11,13 +11,11 @@ Kd = 1;
 if ~isfield(public_vars, 'pid')
     public_vars.pid.integral   = 0;
     public_vars.pid.prev_error = 0;
-    public_vars.pid.last_time  = tic;
     output = 0;
     return;
 end
 
-dt = min(toc(public_vars.pid.last_time), 0.5);
-public_vars.pid.last_time = tic;
+dt = read_only_vars.sampling_period;
 
 public_vars.pid.integral = public_vars.pid.integral + error * dt;
 derivative = (error - public_vars.pid.prev_error) / dt;

@@ -22,6 +22,12 @@ if (isfield(public_vars, 'config') && isfield(public_vars.config, 'meas_mode'))
         end   
     end
 end
+if (read_only_vars.counter == 1)
+    tmp = load('algorithms/uncertainty/lidar_sigma.mat');
+    public_vars.lidar_sigma = tmp.lidar_sigma;
+    tmp = load('algorithms/uncertainty/gnss_sigma.mat');
+    public_vars.gnss_sigma = tmp.gnss_sigma;
+end
 
 
 
