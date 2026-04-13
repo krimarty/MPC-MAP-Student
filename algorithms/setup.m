@@ -18,7 +18,7 @@ elseif CONFIG == 2
 elseif CONFIG == 3
     % Mereni nejistot pohybu
     map_name       = 'maps/indoor_1.txt';
-    start_position = [1.5, 1, pi/2];
+    start_position = [1, 1, pi/2];
     MEAS_MODE      = 'motion';
     public_vars.config.meas_mode = MEAS_MODE;
 
@@ -28,9 +28,8 @@ elseif CONFIG == 4
     start_position = [5, 10, pi/2];
 
 elseif CONFIG == 5
-    % Custom mapa
     map_name       = 'maps/indoor_1.txt';
-    start_position = [2, 2, pi/2];
+    start_position = [1, 1, pi/2];
 end
 
 % =========================================================

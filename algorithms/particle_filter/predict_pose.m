@@ -2,12 +2,12 @@ function [new_pose] = predict_pose(old_pose, motion_vector, read_only_vars)
 %PREDICT_POSE Summary of this function goes here
 
 % Alfy, parametry, ktere vystihuji pohyb robota
-a1 = 2;
-a2 = 2;
-a3 = 2;
-a4 = 2;
-a5 = 2;
-a6 = 2;
+a1 = 1.5;
+a2 = 1.5;
+a3 = 1.5;
+a4 = 1.5;
+a5 = 1.5;
+a6 = 1.5;
 
 vel  = motion_vector(1);
 omeg = motion_vector(2);
@@ -33,6 +33,10 @@ else
     y_new  = y + r*cos(fi) - r*cos(fi + w_hat*dt);
     fi_new = fi + w_hat*dt + gamma_hat*dt;
 end
+
+% Kontrola, aby se particles nedostali mimo mapu map_width  = read_only_vars.map.limits(3);
+x_new = max(0, min(read_only_vars.map.limits(3),  x_new));
+y_new = max(0, min(read_only_vars.map.limits(4), y_new));
 
 new_pose = [x_new y_new fi_new];
 

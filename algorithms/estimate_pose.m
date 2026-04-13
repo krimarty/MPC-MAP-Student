@@ -1,7 +1,8 @@
 function [estimated_pose] = estimate_pose(public_vars)
 %ESTIMATE_POSE Summary of this function goes here
 
-estimated_pose = nan(1,3);
+% Week 4
+estimated_pose = public_vars.estimated_pose_pf;
 
 end
 

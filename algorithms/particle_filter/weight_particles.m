@@ -1,4 +1,4 @@
-function [weights] = weight_particles(particle_measurements, lidar_distances, public_vars)
+function [weights, public_vars] = weight_particles(particle_measurements, lidar_distances, public_vars)
 %WEIGHT_PARTICLES Summary of this function goes here
 
 N = size(particle_measurements, 1);
@@ -39,6 +39,13 @@ for i = 1:N
     weights(i) = w;
 
 end
+
+% Vypocet beliefu, jak moc aktualni mereni sedi s mrakem partiklu
+w_avg = mean(weights);
+alpha_slow = 0.001;
+alpha_fast = 0.1;
+public_vars.pf.w_slow = public_vars.pf.w_slow + alpha_slow * (w_avg - public_vars.pf.w_slow);
+public_vars.pf.w_fast = public_vars.pf.w_fast + alpha_fast * (w_avg - public_vars.pf.w_fast);
 
 % Normalizace s osetrenim proti deleni 0
 if sum(weights) == 0

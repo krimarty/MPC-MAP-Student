@@ -12,5 +12,10 @@ theta = rand(N,1) * 2*pi - pi;
 
 public_vars.particles = [x, y, theta];
 
+% Week 4, AMCL
+public_vars.pf.w_slow = 0;
+public_vars.pf.w_fast = 0;
+
+public_vars.estimated_pose_pf = [NaN, NaN, NaN];
 end
 
