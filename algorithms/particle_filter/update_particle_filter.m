@@ -16,7 +16,7 @@ end
 [weights, public_vars] = weight_particles(measurements, read_only_vars.lidar_distances, public_vars);
 
 
-warmup_steps = 10;
+warmup_steps = 1;
 
 % Estimate pose
 if read_only_vars.counter > warmup_steps

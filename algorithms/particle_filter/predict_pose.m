@@ -9,8 +9,7 @@ a4 = 1.5;
 a5 = 1.5;
 a6 = 1.5;
 
-vel  = motion_vector(1);
-omeg = motion_vector(2);
+[vel, omeg] = inverse_kinematics(motion_vector(1), motion_vector(2), read_only_vars);
 
 % Zasumele rychlosti 
 v_hat = vel + my_randn(a1 * abs(vel) + a2 * abs(omeg));
