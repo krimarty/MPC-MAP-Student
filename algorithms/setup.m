@@ -1,5 +1,5 @@
 % Cislo konfigurace
-CONFIG = 3;
+CONFIG = 6;
 
 if CONFIG == 1
     % Pro mereni lidarovych dat
@@ -30,8 +30,15 @@ elseif CONFIG == 4
 elseif CONFIG == 5
     map_name       = 'maps/indoor_1.txt';
     start_position = [1, 1, pi/2];
-end
 
+elseif CONFIG == 6
+    map_name       = 'maps/outdoor_1.txt';
+    start_position = [2, 2, rand() * 2*pi - pi];
+
+elseif CONFIG == 7
+    map_name       = 'maps/custom_2.txt';
+    start_position = [5, 10, rand() * 2*pi - pi];
+end
 % =========================================================
 
 clear CONFIG MEAS_MODE;

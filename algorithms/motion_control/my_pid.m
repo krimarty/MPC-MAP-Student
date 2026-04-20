@@ -3,7 +3,7 @@ function [output, public_vars] = my_pid(error, public_vars, read_only_vars)
 %   Detailed explanation goes here
 % Ziegler-Nicols K = 0.42, T = 13
 % Kp = 0.252, Ki = 0.0646, Kd = 0.6825
-Kp = 10;
+Kp = 5;
 Ki = 0.1;
 Kd = 1;
 

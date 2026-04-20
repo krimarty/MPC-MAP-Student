@@ -1,4 +1,4 @@
-function [v, w] = pure_pursuit(target, robotPose, read_only_vars, L)
+function [v, w] = pure_pursuit(target, robotPose, read_only_vars, L, uncertainty)
 %PURE_PERSUIT Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -25,11 +25,17 @@ G_robot = H_rot_z * H_trans_x * H_trans_y * G_map;
 % Pure pursuit
 R = L^2/(2*G_robot(2));
 
-w_max = 2 * read_only_vars.agent_drive.max_vel / read_only_vars.agent_drive.interwheel_dist;
-R_min = read_only_vars.agent_drive.max_vel / w_max;
+% Week 5, adjust speed
+k_v = 1;
+v_min = 0.1; % minimální rychlost
+v_max_lim = 0.8; % max 1
+v_max = v_min + (v_max_lim - v_min) * exp(-k_v * uncertainty);
+
+w_max = 2 * v_max / read_only_vars.agent_drive.interwheel_dist;
+R_min = v_max / w_max;
 
 if abs(R) >= R_min
-    v = read_only_vars.agent_drive.max_vel;
+    v = v_max;
     w = v / R;
 else
     w = w_max * sign(R);
