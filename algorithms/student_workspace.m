@@ -52,12 +52,13 @@ else
     [public_vars.mu, public_vars.sigma] = update_kalman_filter(read_only_vars, public_vars);
     
     % 11. Estimate current robot position
-    public_vars.estimated_pose = estimate_pose(public_vars); % (x,y,theta)
+    public_vars.estimated_pose = estimate_pose(public_vars, read_only_vars); % (x,y,theta)
     
     % 12. Path planning
-    %public_vars.path = plan_path(read_only_vars, public_vars);
+    % Week 6
+    public_vars = plan_path(read_only_vars, public_vars);
     % Week 3
-    public_vars.path = custom_path(read_only_vars, public_vars);
+    %public_vars.path = custom_path(read_only_vars, public_vars);
     
     
     % 13. Plan next motion command

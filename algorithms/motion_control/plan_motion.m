@@ -33,7 +33,7 @@ if (isfield(public_vars, 'config') && isfield(public_vars.config, 'meas_mode'))
 else
 
 % Week 5
-uncertainty = trace(public_vars.sigma);
+uncertainty = 0;%trace(public_vars.sigma);
 
 % Week 3
 % CONFIG - choose the method

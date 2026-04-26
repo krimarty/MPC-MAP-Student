@@ -1,5 +1,5 @@
 % Cislo konfigurace
-CONFIG = 6;
+CONFIG = 5;
 
 if CONFIG == 1
     % Pro mereni lidarovych dat
@@ -28,7 +28,7 @@ elseif CONFIG == 4
     start_position = [5, 10, pi/2];
 
 elseif CONFIG == 5
-    map_name       = 'maps/indoor_1.txt';
+    map_name       = 'maps/indoor_2.txt';
     start_position = [1, 1, pi/2];
 
 elseif CONFIG == 6
