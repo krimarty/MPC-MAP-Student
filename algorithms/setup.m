@@ -1,12 +1,12 @@
 
-% map_name       = 'maps/mixed_1.txt';
-% start_position = [2, 14, pi/2];
+map_name       = 'maps/mixed_1.txt';
+start_position = [2, 14, pi/2];
 
 % map_name       = 'maps/indoor_1.txt';
 % start_position = [0.4, 0.4, -pi/2];
 
-map_name       = 'maps/indoor_2.txt';
-start_position = [0.4, 0.4, -pi/2];
+% map_name       = 'maps/indoor_2.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
 % map_name       = 'maps/indoor_3.txt';
 % start_position = [0.4, 0.4, -pi/2];

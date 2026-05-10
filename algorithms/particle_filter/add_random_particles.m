@@ -2,7 +2,11 @@ function [particles] = add_random_particles(particles, read_only_vars, public_va
 %ADD_RANDOM_PARTICLES Summary of this function goes here
 %   Detailed explanation goes here
 
-p_random = max(0, 1 - public_vars.pf.w_fast/public_vars.pf.w_slow);
+if public_vars.pf.w_slow < 1e-10
+    p_random = 0.1;
+else
+    p_random = max(0.03, 1 - public_vars.pf.w_fast / public_vars.pf.w_slow);
+end
 n_random = round(p_random * size(particles, 1));
 
 if n_random == 0
