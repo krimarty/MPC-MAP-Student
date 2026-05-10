@@ -17,7 +17,7 @@ step = 2;
 col = pos(1);
 row = pos(2);
 
-while (row ~= goal(2) || col ~= goal(1)) && step < max_steps
+while (row ~= goal(2) || col ~= goal(1)) && step < 10%max_steps
     new_col = col + actions(policy(row,col), 2);
     new_row = row + actions(policy(row,col), 1);
     path(step, :) = [new_row, new_col];
@@ -26,6 +26,6 @@ while (row ~= goal(2) || col ~= goal(1)) && step < max_steps
     step = step + 1;
 end
 
-path(step, :) = [goal(2), goal(1)];
-path = path(1:step, :);
+%path(step, :) = [goal(2), goal(1)];
+path = path(1:step-1, :);
 end

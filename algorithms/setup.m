@@ -1,44 +1,33 @@
-% Cislo konfigurace
-CONFIG = 5;
 
-if CONFIG == 1
-    % Pro mereni lidarovych dat
-    map_name       = 'maps/indoor_1.txt';
-    start_position = [5, 5, pi/2];
-    MEAS_MODE      = 'lidar';
-    public_vars.config.meas_mode = MEAS_MODE;
+% map_name       = 'maps/mixed_1.txt';
+% start_position = [2, 14, pi/2];
 
-elseif CONFIG == 2
-    % Pro mereni gnss dat
-    map_name       = 'maps/outdoor_1.txt';
-    start_position = [8, 8, pi/2];
-    MEAS_MODE      = 'gnss';
-    public_vars.config.meas_mode = MEAS_MODE;
+% map_name       = 'maps/indoor_1.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
-elseif CONFIG == 3
-    % Mereni nejistot pohybu
-    map_name       = 'maps/indoor_1.txt';
-    start_position = [1, 1, pi/2];
-    MEAS_MODE      = 'motion';
-    public_vars.config.meas_mode = MEAS_MODE;
+map_name       = 'maps/indoor_2.txt';
+start_position = [0.4, 0.4, -pi/2];
 
-elseif CONFIG == 4
-    % Custom mapa
-    map_name       = 'maps/custom_1.txt';
-    start_position = [5, 10, pi/2];
+% map_name       = 'maps/indoor_3.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
-elseif CONFIG == 5
-    map_name       = 'maps/indoor_2.txt';
-    start_position = [1, 1, pi/2];
+% map_name       = 'maps/outdoor_1.txt';
+% start_position = [14, 14, -pi/2];
 
-elseif CONFIG == 6
-    map_name       = 'maps/outdoor_1.txt';
-    start_position = [2, 2, rand() * 2*pi - pi];
+% map_name       = 'maps/custom_3.txt';   % Serpentine 20x12 - 3x GNSS denied, 2 uzke prujezdy
+% start_position = [1, 1, 0];
 
-elseif CONFIG == 7
-    map_name       = 'maps/custom_2.txt';
-    start_position = [5, 10, rand() * 2*pi - pi];
-end
-% =========================================================
+% map_name       = 'maps/custom_4.txt';   % Rooms 18x18 - 4 mistnosti, cesta vede pres GNSS denied
+% start_position = [15, 1, 0];
 
-clear CONFIG MEAS_MODE;
+% map_name       = 'maps/custom_5.txt';   % Gauntlet 24x8 - koriodor, 4 prekazky, 2x GNSS denied
+% start_position = [6, 4, 0];
+
+% map_name       = 'maps/custom_6.txt';   % Asymmetric rooms 20x18 - 3x GNSS, asymetricke steny pro PF
+% start_position = [1, 9, 0];
+
+% map_name       = 'maps/custom_7.txt';   % Outdoor irregular 22x14 - budovy, 2x nepravidelna GNSS zona
+% start_position = [2, 2, 0];
+
+% map_name       = 'maps/outdoor_2.txt';
+% start_position = [2, 14, pi/2];

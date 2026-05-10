@@ -9,10 +9,17 @@ public_vars.kf.R = diag([0.0008, 0.0008, 0.00007]);  % Noisy but smaller XTE
 
 public_vars.kf.Q = public_vars.gnss_covariance;
 
-public_vars.mu = [public_vars.init_pos(1); public_vars.init_pos(2); 0];
-
-public_vars.sigma = [public_vars.gnss_covariance(1,1), 0, 0;
-                     0, public_vars.gnss_covariance(2,2), 0;
-                     0, 0, pi^2];
+if (public_vars.pf_enabled == 1)
+    public_vars.mu = public_vars.estimated_pose_pf';
+    covariance = cov(public_vars.particles);
+    public_vars.sigma = [covariance(1,1), 0, 0;
+                         0, covariance(2,2), 0;
+                         0, 0, covariance(3,3)];
+    public_vars.particles = [];
+else
+    public_vars.mu = [public_vars.init_pos(1); public_vars.init_pos(2); 0];
+    public_vars.sigma = [public_vars.gnss_covariance(1,1), 0, 0;
+                         0, public_vars.gnss_covariance(2,2), 0;
+                         0, 0, pi^2];
 
 end

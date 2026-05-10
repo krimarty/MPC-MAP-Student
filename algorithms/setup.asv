@@ -1,33 +1,27 @@
-% Cislo konfigurace
-CONFIG = 4;
 
-if CONFIG == 1
-    % Pro mereni lidarovych dat
-    map_name       = 'maps/indoor_1.txt';
-    start_position = [5, 5, pi/2];
-    MEAS_MODE      = 'lidar';
-    public_vars.config.meas_mode = MEAS_MODE;
+% map_name       = 'maps/mixed_1.txt';
+% start_position = [2, 14, pi/2];
 
-elseif CONFIG == 2
-    % Pro mereni gnss dat
-    map_name       = 'maps/outdoor_1.txt';
-    start_position = [8, 8, pi/2];
-    MEAS_MODE      = 'gnss';
-    public_vars.config.meas_mode = MEAS_MODE;
+% map_name       = 'maps/indoor_1.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
-elseif CONFIG == 3
-    % Mereni nejistot pohybu
-    map_name       = 'maps/indoor_1.txt';
-    start_position = [1.5, 1, pi/2];
-    MEAS_MODE      = 'motion';
-    public_vars.config.meas_mode = MEAS_MODE;
+% map_name       = 'maps/indoor_2.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
-elseif CONFIG == 4
-    % Custom mapa
-    map_name       = 'maps/custom_1.txt';
-    start_position = [5, 15, 0];
-end
+% map_name       = 'maps/indoor_3.txt';
+% start_position = [0.4, 0.4, -pi/2];
 
-% =========================================================
+% map_name       = 'maps/outdoor_1.txt';
+% start_position = [14, 14, -pi/2];
 
-clear CONFIG MEAS_MODE;
+% map_name       = 'maps/custom_3.txt';   % Serpentine 20x12 - 3x GNSS denied, 2 uzke prujezdy
+% start_position = [1, 1, 0];
+
+map_name       = 'maps/custom_4.txt';   % Rooms 18x18 - 4 mistnosti, cesta vede pres GNSS denied
+start_position = [1, 1, 0];
+
+% map_name       = 'maps/custom_5.txt';   % Gauntlet 24x8 - koriodor, 4 prekazky, 2x GNSS denied
+% start_position = [1, 4, 0];
+
+% map_name       = 'maps/outdoor_2.txt';
+% start_position = [2, 14, pi/2];

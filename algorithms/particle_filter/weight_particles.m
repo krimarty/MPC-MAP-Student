@@ -17,18 +17,23 @@ for i = 1:N
     w = 1;
     valid_count = 0;
 
-    % PDF, pro kazdy paprsek z particle vypocitam vysku 
+    % PDF, pro kazdy paprsek z particle vypocitam vysku
     % Thrun kapitola 6.3.1
     % z_t^k ... vzdalenost particle, z_t^k* ... co nameril lidar, sigma ... z
     % kazeho paprsku vlastni
     % Plus se rovnou provede soucin vah
     for j = 1:n_ray
 
-        % Osetreni proti inf hodnote, paprsek se preskoci a neovlivni vahy
-        if isinf(particle_measurements(i,j)) || isinf(mu(j))
+        if isinf(mu(j))
             continue
         end
-        w = w * norm_pdf(particle_measurements(i,j), mu(j), sigma(j));
+
+        meas = particle_measurements(i,j);
+        if isinf(meas)
+            meas = 1e6;
+        end
+
+        w = w * norm_pdf(meas, mu(j), sigma(j));
         valid_count = valid_count + 1;
     end
 

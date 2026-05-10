@@ -1,41 +1,12 @@
 function [public_vars] = plan_motion(read_only_vars, public_vars)
 %PLAN_MOTION Summary of this function goes here
 
-% Week 2 
-if (isfield(public_vars, 'config') && isfield(public_vars.config, 'meas_mode'))
-
-    if (strcmp(public_vars.config.meas_mode, 'motion'))
-        % Task 5
-        c = read_only_vars.counter;
-        if c < 120
-            public_vars.motion_vector = [0.5, 0.5];    % rovne nahoru
-        
-        elseif c < 240
-            public_vars.motion_vector = [0.45, 0.5];   % otocka vpravo (na vychod)
-        
-        elseif c < 350
-            public_vars.motion_vector = [0.5, 0.5];    % rovne doprava
-        
-        elseif c < 400
-            public_vars.motion_vector = [0.5, 0.4];   % otocka vpravo (na jih)
-        
-        else
-            public_vars.motion_vector = [0.5, 0.5];    % rovne dolu
-        
-        end
-
-    else
-        % Task 2,3
-        public_vars.motion_vector = [0, 0];
-
-    end
-
+if (public_vars.kf_enabled)
+    uncertainty = trace(public_vars.sigma);
 else
+    uncertainty = 0;
+end
 
-% Week 5
-uncertainty = 0;%trace(public_vars.sigma);
-
-% Week 3
 % CONFIG - choose the method
 method   = 'pure_pursuit';   % 'xte', 'pure_pursuit'
 L        = 0.5;                % lookahead distance (pure_pursuit)
@@ -50,39 +21,26 @@ switch method
 
     case 'pure_pursuit'
         target = get_target(public_vars.path, public_vars.estimated_pose(1:2), L);
-        [v, w] = pure_pursuit(target, public_vars.estimated_pose, read_only_vars, L, uncertainty);
+        [v, w] = pure_pursuit(target, public_vars.estimated_pose, read_only_vars, public_vars, L, uncertainty);
         [vr, vl] = kinematics(v, w, read_only_vars);
 
     otherwise
         error('plan_motion: wrong motion: %s', method);
 end
 
-public_vars.motion_vector = [vr, vl];
-
-% % Week 3 method camparison
-% % Plot XTE vs time (
-% if ~isfield(public_vars, 'y_history')
-%     public_vars.y_history = [];
-% end
-% 
-% public_vars.y_history = [public_vars.y_history; read_only_vars.mocap_pose(2)];
-% 
-% XTE_log = cross_track_error(public_vars.path, read_only_vars.mocap_pose(1:2));
-% t_now   = (length(public_vars.y_history) - 1) * read_only_vars.sampling_period;
-% 
-% % Logovani XTE do souboru
-% log_path = fullfile('logs', ['xte_01', '.csv']);
-% if length(public_vars.y_history) == 1
-%     fid = fopen(log_path, 'w');
-%     fprintf(fid, 'time,xte\n');
-% else
-%     fid = fopen(log_path, 'a');
-% end
-% fprintf(fid, '%.4f,%.6f\n', t_now, XTE_log);
-% fclose(fid);
-
+% Safety collision function
+if (read_only_vars.lidar_distances(1) < 0.5 || read_only_vars.lidar_distances(2) < 0.5 || read_only_vars.lidar_distances(8) < 0.5)
+    if (read_only_vars.lidar_distances(2) < 0.4 || read_only_vars.lidar_distances(8) < 0.4) && ...
+       read_only_vars.lidar_distances(2) < read_only_vars.lidar_distances(8)
+        public_vars.motion_vector = [-0.2, 0.2];
+    elseif (read_only_vars.lidar_distances(2) < 0.4 || read_only_vars.lidar_distances(8) < 0.4) && ...
+           read_only_vars.lidar_distances(8) < read_only_vars.lidar_distances(2)
+        public_vars.motion_vector = [0.2, -0.2];
+    else
+        public_vars.motion_vector = [-0.2, 0.2];
+    end
+else
+    public_vars.motion_vector = [vr, vl];
 end
-
-
 
 end
